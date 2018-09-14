@@ -185,7 +185,7 @@ func switchKeyValue(val bool, srv service, apiToken string) {
 		log.Fatal(fmt.Sprintf("error reading PATCH response: %v", err))
 	}
 
-	fmt.Printf("%+v\n\n", string(contents))
+	fmt.Printf("dictionary updated: %+v\n\n", string(contents))
 }
 
 func loadConfig(path string) *config {
