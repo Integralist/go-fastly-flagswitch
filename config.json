@@ -1,0 +1,9 @@
+{
+  "services": [
+    {
+      "name": "your_service_name",
+      "id": "123",
+      "dictionary": "456"
+    }
+  ]
+}
