@@ -165,27 +165,9 @@ func switchKeyValue(val bool, srv service, apiToken string) {
 	data := bytes.NewBufferString(fmt.Sprintf("item_value=%t", val))
 	url := fmt.Sprintf("%s/service/%s/dictionary/%s/item/%s", apiHost, srv.ID, srv.Dictionary, dictKey)
 
-	req, err := http.NewRequest("PATCH", url, data)
-	if err != nil {
-		log.Fatal(fmt.Sprintf("error creating PATCH request: %v", err))
-	}
+	result := apiCall(apiToken, url, "PATCH", data)
 
-	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
-	req.Header.Set("Fastly-Key", apiToken)
-
-	resp, err := netClient.Do(req)
-	if err != nil {
-		log.Fatal(fmt.Sprintf("error making PATCH request: %v", err))
-	}
-
-	defer resp.Body.Close()
-
-	contents, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		log.Fatal(fmt.Sprintf("error reading PATCH response: %v", err))
-	}
-
-	fmt.Printf("dictionary updated: %+v\n\n", string(contents))
+	fmt.Printf("dictionary updated: %+v\n\n", result)
 }
 
 func loadConfig(path string) *config {
